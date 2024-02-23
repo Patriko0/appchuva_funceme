@@ -6,5 +6,6 @@ para instalar todas as dependencias
 
 # Iniciar aplicação
 
-Use o comando no terminal:
-* **venv/bin/flask --app ./app/__init\_\_ run**
+Use os comandos no terminal:
+* **. venv/bin/activate**
+* **python3 run.py runserver**
