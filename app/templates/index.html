@@ -18,20 +18,24 @@
   <div class="container h-75 container-color p-5 mt-5 rounded">
     <div class="row h-100">
       <div class="col-3">
-        <form action="" method="post" class="flex-column gap-5 d-flex">
-          <div class="row"><h1 class="text-center">Ano: </h1></div>
-          <div class="row"><input type="number" name="ano" id="inputAno" min="1974" max="2024" class="form-control" placeholder="1974 / 2024"></div>
-          <div class="row"><h1 class="text-center">Mês: </h1></div>
-          <div class="row"><input type="number" name="mes" id="inputMes" min="1" max="12" class="form-control" placeholder="01 / 12"></div>
-          <input type="number" name="postId" id="inputId" class="d-none">
-          <button type="submit" class="btn btn-primary">Gerar tabelas</button>
-        </form>
-        
+        <div class="row">
+          <form action="" method="post" class="flex-column gap-5 d-flex">
+            <div class="row"><h1 class="text-center">Ano: </h1></div>
+            <div class="row"><input type="number" name="ano" id="inputAno" min="1974" max="2024" class="form-control" placeholder="1974 / 2024"></div>
+            <div class="row"><h1 class="text-center">Mês: </h1></div>
+            <div class="row"><input type="number" name="mes" id="inputMes" min="1" max="12" class="form-control" placeholder="01 / 12"></div>
+            <input type="number" name="postoId" id="inputId" class="d-none">
+            <div class="row"><label id="posto" class="form-label p-0 lead">Posto: Nenhum posto selecionado</label></div>
+            <div class="row"><button type="submit" class="btn btn-primary">Gerar tabelas</button></div>
+            
+            
+          </form>
+        </div>
       </div>
       <div class="col">
         <gmp-map center="-5.49,-39.34" zoom="6" map-id="DEMO_MAP_ID" class="rounded">
           {% for cord in cords %}
-            <gmp-advanced-marker position="{{cord.lat}},{{cord.lon}}" title="My location" value = "{{cord.id}}"></gmp-advanced-marker>
+            <gmp-advanced-marker position="{{cord.lat}},{{cord.lon}}" title="Posto {{cord.id}}" value = "{{cord.id}}"></gmp-advanced-marker>
           {% endfor %}
         </gmp-map>
       </div>
