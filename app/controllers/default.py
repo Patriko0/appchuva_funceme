@@ -35,15 +35,22 @@ def index():
         anoI = ano
         
         for i in range(1, 13):
-            
+                        
             mesI = mesI + 1 if mesI + 1 <= 12 else 1
-            anoI = anoI + 1 if mesI < mes else anoI
-            mesPos = mesI + 1 if mesI + 1 < 12 else 1
-            min = f'{ano}-{mesI}-01'
-            max = f'{anoI}-{mesPos}-01'
+            anoI = anoI + 1 if (mesI < mes) & (ano == anoI) else anoI
+            mesPos = mesI + 1 if mesI + 1 <= 12 else 1
+            bug = anoPos if not( mesI>mesPos) else anoI + 1
+            if(bug < anoI): bug = anoI
+            min = f'{anoI}-{mesI}-01'
+            max = f'{bug}-{mesPos}-01'
+            
+            print(min, max)
+            
+
 
             mesData = mensal[(mensal['Data'] >= min) & (mensal['Data'] < max)]
             precip = mesData['Precipitacao'].values
+            # print(mesData)
             value = float('{:.3f}'.format(precip.sum()))
             mensalPrecipitacao.append(value)
         
