@@ -31,13 +31,17 @@ def index():
         mensalPrecipitacao = []
         anualPrecipitacao = []
         
+        mesI = mes
+        anoI = ano
         
         for i in range(1, 13):
-            mesPos = i if i + 1 > 12 else i+1
-            anoPos = ano + 1 if mesPos == i else ano
-            min = f'{ano}-{i}-01'
-            max = f'{anoPos}-{mesPos}-01'
             
+            mesI = mesI + 1 if mesI + 1 <= 12 else 1
+            anoI = anoI + 1 if mesI < mes else anoI
+            mesPos = mesI + 1 if mesI + 1 < 12 else 1
+            min = f'{ano}-{mesI}-01'
+            max = f'{anoI}-{mesPos}-01'
+
             mesData = mensal[(mensal['Data'] >= min) & (mensal['Data'] < max)]
             precip = mesData['Precipitacao'].values
             value = float('{:.3f}'.format(precip.sum()))
@@ -59,7 +63,8 @@ def index():
         for i in range(1, len(diarioPrecipitacao)+1):
             diarioLabel.append(i)
         for i in range(1,13):
-            mensalLabel.append(i) 
+            value = (mes + i) if (mes + i) <= 12 else mes + i - 12
+            mensalLabel.append(value) 
             
         for i in range( len(anualPrecipitacao)):
             anualLabel.append(ano - i)
