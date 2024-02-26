@@ -31,7 +31,7 @@ def index():
         mensalPrecipitacao = []
         anualPrecipitacao = []
         
-        mesI = mes
+        mesI = mes - 1
         anoI = ano
         
         for i in range(1, 13):
