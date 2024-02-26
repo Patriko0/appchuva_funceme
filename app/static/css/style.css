@@ -7,5 +7,5 @@
 }
 
 .container{
-  height: 700px !important;
+  min-height: 700px !important;
 }

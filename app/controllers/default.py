@@ -25,9 +25,12 @@ def index():
         mensal = table[(table["Data"] >= f'{ano}-01-01') & (table["Data"] < f'{ano + 1}-01-01')]
         anual = table[(table["Data"] <= f'{ano}-12-31') & (table["Data"] >= f'{ano-9}-01-01')]
         
-        diarioPrecipitacao = diario['Precipitacao'].values
+        diarioPrecipitacao = []
+        for value in diario['Precipitacao'].values:
+            diarioPrecipitacao.append(value)
         mensalPrecipitacao = []
         anualPrecipitacao = []
+        
         
         for i in range(1, 13):
             mesPos = i if i + 1 > 12 else i+1
@@ -48,7 +51,21 @@ def index():
             precip = anoData['Precipitacao'].values
             value = float('{:.3f}'.format(precip.sum()))
             anualPrecipitacao.append(value)
-                   
-        return render_template("index.html", cords = cords, diario=diarioPrecipitacao, mensal=mensal, anual=anual)
+            
+        diarioLabel = []
+        mensalLabel = []
+        anualLabel = []
+        
+        for i in range(1, len(diarioPrecipitacao)+1):
+            diarioLabel.append(i)
+        for i in range(1,13):
+            mensalLabel.append(i) 
+            
+        for i in range( len(anualPrecipitacao)):
+            anualLabel.append(ano - i)
+            
+        
+        
+        return render_template("index.html", cords = cords, diario=[diarioLabel, diarioPrecipitacao], mensal=[mensalLabel, mensalPrecipitacao], anual=[anualLabel, anualPrecipitacao], post = request.method == 'POST')
         
     return render_template("index.html", cords = cords)
